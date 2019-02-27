@@ -5,15 +5,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import exception.DomainException;
 import model.Reservation;
+import services.ReservationService;
 
 @SpringBootApplication
 public class Program {
+
+	@Autowired
+	private static ReservationService reservationService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Program.class, args);
@@ -38,7 +42,7 @@ public class Program {
 			System.out.print("Check-out date (dd/MM/yyyy): ");
 			checkOut = sdf.parse(sc.next());
 
-			reservation.updateDates(checkIn, checkOut);
+			reservationService.updateDates(reservation, checkIn, checkOut);
 			System.out.println("Reservation: " + reservation);
 
 		} catch (ParseException e) {
@@ -49,5 +53,4 @@ public class Program {
 
 		sc.close();
 	}
-
 }
