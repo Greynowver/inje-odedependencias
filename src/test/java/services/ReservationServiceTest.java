@@ -2,6 +2,8 @@ package services;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
@@ -12,14 +14,18 @@ import model.Reservation;
 
 public class ReservationServiceTest {
 
+	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
 	@Autowired
 	private ReservationService service;
 
 	@Test
-	public void teste() throws DomainException {
-		Reservation reservation = new Reservation(1, new Date("27/02/2019"), new Date("04/03/2019"));
+	public void teste() throws DomainException, ParseException {
 
-		service.updateDates(reservation, new Date("01/03/2019"), new Date("05/03/2019"));
+
+		Reservation reservation = new Reservation(1, sdf.parse("27/02/2019"), sdf.parse("04/03/2019"));
+
+		service.updateDates(reservation,  sdf.parse("01/03/2019"), sdf.parse("05/03/2019"));
 
 		assertTrue(true);
 	}
