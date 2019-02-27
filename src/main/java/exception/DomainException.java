@@ -1,3 +1,4 @@
+package exception;
 public class DomainException extends Exception{
 
 
